@@ -1,12 +1,15 @@
 # Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks
 
-Launch Jenkins CICD Server
+**To Continuous Integration and Continuous Deployment to deploy the code and run a docker container in Production machine after the code tested with SonarQube**
 
-Step -1: Launch Jenkins CICD server
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/a35be616-9810-4c60-8303-2d3b837a7743)
+
+
+**Step -1: Launch Jenkins CICD server**
 
 To launch EC2 ubuntu-22 instance with T3.medium in AWS cloud.
 
-Step -2: SSH to Jenkins Server
+**Step -2: SSH to Jenkins Server**
 
 To SSH to machine and update the ubuntu system.
 
@@ -16,7 +19,7 @@ Jenkins will work on Java run time, So we need to install the Java in Jenkins CI
 
 #sudo apt-get install openjdk-11-jre -y
 
-Step -3: Install Jenkins 
+**Step -3: Install Jenkins**
 
 #curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -33,7 +36,7 @@ Use below link to copy/paste the installation steps
 
 https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/blob/main/install-jenkins.sh
 
-Step -4: To access the Jenkins web console
+**Step -4: To access the Jenkins web console**
 
 To access the jenkins console with Jenkins server IP with Port 8080 and unlock the jenkins 
 
@@ -47,13 +50,13 @@ To create a first admin user then save and continue
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/669f91f0-55c5-423e-ac83-ffecda029259)
 
-Step -5: Create a free-style project
+**Step -5: Create a free-style project**
 
 Let's create a free-stle project in Jenkins console and configure the Soure code management
 
 Please clone the project from below github link
 
-https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks.git
+**https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks.git**
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/592d8703-11ca-4e81-bcfd-0dbb669456c9)
 
@@ -69,7 +72,7 @@ Then save the project and run the build manually to ensure everything working fi
 
 Perfect! The build has been succeeded. Now automate this process through enabling webhooks in GitHub. So Whenever any changes code in GitHub then automatically build will happen. Let's create a webhook for GitHub project.
 
-Step -6: To create a GitHub webhook
+**Step -6: To create a GitHub webhook**
 
 Navigate to GitHub and select your project - settings - webhooks - add the Jenkins URL in payload URL with /github-webhook/.
 
@@ -85,7 +88,7 @@ Let's create the test file in GitHub project to ensure the Jenkins build has bee
 
 Here we go, the Jenkins build has been automatically started as we expected too.
 
-Step -7: Configure Sonarqube
+**Step -7: Configure Sonarqube**
 
 Launch one more EC2 ubuntu instance with t3.medium for Sonarqube application and update the system.
 
@@ -141,7 +144,7 @@ then select - security - to generate a tokens for your project and copy/paste it
 
 **sqp_3709a74a3c5b21ddf28fbe806da749e188f61265**
 
-Step -8: Install plugins in Jenkins
+**Step -8: Install plugins in Jenkins**
 
 Go back to Jenkins console and install the below plugins
 
@@ -149,19 +152,19 @@ Go back to Jenkins console and install the below plugins
 
 **SonarQube Scanner**
 
-step -9: Configure Sonarqube scanner
+**step -9: Configure Sonarqube scanner**
 
 Navigate to Jenkins console and select Tools then scroll all the way down and update the Sonarqube Scanner.
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/6f68a1a6-f99e-423f-ab77-8a698f3a356f)
 
-step -10: Configure Sonarqube server
+**step -10: Configure Sonarqube server**
 
 Navigate to Jenkins console and select Manage Jenkins then select System to configure Sonarqube server.
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/667ccb94-842c-447d-8f58-b97a3bd3f03c)
 
-step -11: Configure Sonarqube in project
+**step -11: Configure Sonarqube in project**
 
 Select you project in Jenkins - choose - Configure - go to Build steps - select - Execute Sonarqube scanner
 
@@ -179,7 +182,7 @@ Add this Token and Save the System
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/d0127093-def5-4e23-a3ec-cf1fe324d4be)
 
-Step -12: Build and Test
+**Step -12: Build and Test**
 
 To ensure the code has been tested with Sonarqube after the build the project.
 
@@ -191,7 +194,7 @@ Build has been succeded as well code has been validated from Sonarqube. Let me c
 
 Perfect! The code has been Passed with Sonarqube test. Hereafter, we need to setup the docker server to deploy our application once the build and test has been succeded.
 
-Step -13: Configure Docker Server
+**Step -13: Configure Docker Server**
 
 Launch one ubuntu EC2 instance with t3.micro and install the docker service on it.
 
@@ -240,7 +243,7 @@ To change the password for user ubuntu in Docker server
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/e6a3959a-11c5-4707-91be-4206b7b7512f)
 
-Step -14: To access the Docker server from Jenkins Server with password
+**Step -14: To access the Docker server from Jenkins Server with password**
 
 To access the docker server from jenkins server using ssh with password. Login to Jenkins machine through SSH.
 
@@ -254,7 +257,7 @@ To access the docker server from jenkins server using ssh with password. Login t
 
 Yes, I can able to login to docker machine
 
-Step -15: To access the docker server from Jenkins Server without password
+**Step -15: To access the docker server from Jenkins Server without password**
 
 To do so, We need to ssh-keygen to generate the SSH key in Jenkins machine then it should copy to the target <docker> machine.
 
@@ -268,7 +271,7 @@ To do so, We need to ssh-keygen to generate the SSH key in Jenkins machine then 
 
 Now, I can able to login to docker server from jenkins server through SSH without password.(Because we are using ssh key here to login)
 
-Step -16: To add Server Group Center in Jenkins console
+**Step -16: To add Server Group Center in Jenkins console**
 
 Navigate to jenkins console - select - Manage jenkins - System - scroll down - look at the Server Group Center
 
@@ -276,7 +279,7 @@ Navigate to jenkins console - select - Manage jenkins - System - scroll down - l
 
 My docker server username is ubuntu and type the password what was set in docker server. Then apply and save it.
 
-Step -17: To configure the Server List
+**Step -17: To configure the Server List**
 
 Navigate to jenkins console - select - Manage jenkins - System - scroll down - look at the Server List. Now add your Docker server.
 
@@ -284,7 +287,7 @@ Navigate to jenkins console - select - Manage jenkins - System - scroll down - l
 
 Then apply and save it.
 
-Step -18: To configure the Remote Shell
+**Step -18: To configure the Remote Shell**
 
 To configure the Remote shell in your project which was created in Jenkins console. Select your project - configure - Build Steps - Choose Remote Shell
 
@@ -302,7 +305,7 @@ Let me check with my docker machine
 
 File has been created in docker machine
 
-Step -19: Create a Docker file
+**Step -19: Create a Docker file**
 
 To create a docker file in your repository.
 
@@ -310,7 +313,7 @@ To create a docker file in your repository.
 
 In this Docker file, im just using nginx image and copying the current directory files to /usr/share/nginx/html/ folder.
 
-Step -20: To copy files using SCP
+**Step -20: To copy files using SCP**
 
 To copy a currect directory files in jenkins server to docker server using SCP command in Build execute shell. To do so, first create one directory called website in docker server with below path
 
@@ -334,7 +337,7 @@ I just copying the all the files in the current directory of jenkins build serve
 
 Yup! Everything has been copied from jenkins (/var/lib/jenkins/workspace/Automated-Pipeline/) to docker server inside /home/ubuntu/website/ folder.
 
-Step -21: To add a user to docker group
+**Step -21: To add a user to docker group**
 
 By default, the ubuntu user has no permission to access the docker. So we need to add the user ubuntu to docker group in docker server.
 
@@ -346,7 +349,7 @@ By default, the ubuntu user has no permission to access the docker. So we need t
 
 #docker ps
 
-Step -22: To add a Remote shell
+**Step -22: To add a Remote shell**
 
 To add a Remote Shell in Jenkins console to configure docker to run a container
 
@@ -368,4 +371,11 @@ If I access the container from browser, Yes I can access
 
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/9e12a341-4643-418d-9517-c3fd606a24eb)
 
+**Step -23: To check with CICD**
+
+Now, I'm going to do some changes in my GitHub repository. So what will happen? Once code has been changed, then automatically Jenkins pull the code from repository and this code should be Tested with SonarQube. Once the Code has been Tested and Passed, then deploy the code to target machine. After that using Docker file, the docker container has been up and running successfully.
+
+Make ensure the SonarQube scanner step should be first in build steps. After this SonarQube scanner test stage, you should place Remote Shell in build steps.
+
+**That's it.**
 
