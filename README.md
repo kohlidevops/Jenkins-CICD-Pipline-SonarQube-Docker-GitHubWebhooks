@@ -286,11 +286,86 @@ Then apply and save it.
 
 Step -18: To configure the Remote Shell
 
-To configure the Remote shell in your project which was created in Jenkins console. Select your project - configure - Build Environment - Choose Remote Shell
+To configure the Remote shell in your project which was created in Jenkins console. Select your project - configure - Build Steps - Choose Remote Shell
 
-![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/3046c830-205b-43de-b54c-d3d1cbdf1d84)
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/4602c753-26ae-4a56-9c79-815bca9fcad8)
 
-Then touch command to create one test file from jenkins project and build this project agai and check in docker server whether file has been created or not.
+Then touch command to create one test file from jenkins project and build this project again and check in docker server whether file has been created or not.
 
+Perfect! My build has been succeeded. 
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/f77370d9-cacc-40e5-89f9-7d39cb7a9e5f)
+
+Let me check with my docker machine
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/0a82593c-9c13-412a-ab0b-46cdc5682322)
+
+File has been created in docker machine
+
+Step -19: Create a Docker file
+
+To create a docker file in your repository.
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/b13cecc2-c46b-4696-9a58-c8a9c39ebe32)
+
+In this Docker file, im just using nginx image and copying the current directory files to /usr/share/nginx/html/ folder.
+
+Step -20: To copy files using SCP
+
+To copy a currect directory files in jenkins server to docker server using SCP command in Build execute shell. To do so, first create one directory called website in docker server with below path
+
+#mkdir website
+
+#cd website
+
+#pwd
+
+#/home/ubuntu/website
+
+Back to Jenkins console and select your project - configure. This time remove Remote Shell from the project (Because we have configured Remote Shell to ensure whether we can create a file in docker server).
+
+#scp -r ./* ubuntu@52.66.242.179:~/website/
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/1f4c991a-9fc6-4aa1-8448-0a2e27a29ae9)
+
+I just copying the all the files in the current directory of jenkins build server to remote server (docker server). Then save and run the build. 
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/a4cb7628-5cd2-4d52-801f-00c221124337)
+
+Yup! Everything has been copied from jenkins (/var/lib/jenkins/workspace/Automated-Pipeline/) to docker server inside /home/ubuntu/website/ folder.
+
+Step -21: To add a user to docker group
+
+By default, the ubuntu user has no permission to access the docker. So we need to add the user ubuntu to docker group in docker server.
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/53576043-264d-4816-a977-2e74052cda9f)
+
+#sudo usermod -aG docker ubuntu
+
+#newgrp docker
+
+#docker ps
+
+Step -22: To add a Remote shell
+
+To add a Remote Shell in Jenkins console to configure docker to run a container
+
+#cd /home/ubuntu/website/
+
+#docker build -t mywebsite .
+
+#docker run -d -p 8090:80 --name=mywebapp mywebsite
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/30a2259b-3656-4230-8e61-be5ad2e63ec2)
+
+I just instructed that first change directory to my website directory then build the docker image using docker file. After the image processing, to run the docker container using docker image and port mapping for Host(EC2 instance) is 8090 and 80 for container port.
+
+Build again. After the build succeeded, i can able to see the running conatiner in docker server.
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/10042f6f-d6bb-4bad-80e5-cb8b2f1a0fea)
+
+If I access the container from browser, Yes I can access
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/9e12a341-4643-418d-9517-c3fd606a24eb)
 
 
