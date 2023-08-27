@@ -283,3 +283,14 @@ Navigate to jenkins console - select - Manage jenkins - System - scroll down - l
 ![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/bb2e0c67-447c-4bda-8bd3-c9e577640b5d)
 
 Then apply and save it.
+
+Step -18: To configure the Remote Shell
+
+To configure the Remote shell in your project which was created in Jenkins console. Select your project - configure - Build Environment - Choose Remote Shell
+
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/3046c830-205b-43de-b54c-d3d1cbdf1d84)
+
+Then touch command to create one test file from jenkins project and build this project agai and check in docker server whether file has been created or not.
+
+
+
