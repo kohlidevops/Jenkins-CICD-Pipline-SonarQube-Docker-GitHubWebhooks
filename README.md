@@ -2,7 +2,7 @@
 
 **To Continuous Integration and Continuous Deployment to deploy the code and run a docker container in Production machine after the code tested with SonarQube**
 
-![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/6baddcc7-6487-46cb-9ed8-aac3569eedf8)
+![image](https://github.com/kohlidevops/Jenkins-CICD-Pipline-SonarQube-Docker-GitHubWebhooks/assets/100069489/33926efb-ca06-4c01-8eb8-07a98b0decf8)
 
 
 **Step -1: Launch Jenkins CICD server**
